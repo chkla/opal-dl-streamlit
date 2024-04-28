@@ -164,10 +164,6 @@ def apply_filters(
     )
     assert len(all_models) >= len(option_models), f"Missing Models: {option_models - all_models}"
 
-    # Load text sources allow list if available
-    if text_source_allow_list:
-        text_sources_allow_list = text_source_allow_list
-
     if selected_collection:
         filtered_df = filtered_df[filtered_df["Collection"] == selected_collection]
 
@@ -209,9 +205,9 @@ def apply_filters(
             # If so, apply the GitHub license information (if it is not empty) to the DataProvenance IgnoreOpenAI license information
             if "DataProvenance IgnoreOpenAI" in selected_license_sources:
                 filtered_df["License Use (DataProvenance IgnoreOpenAI)"] = filtered_df.apply(
-                    lambda row: row["License Use (DataProvenance IgnoreOpenAI)"]  # check the existing license from DataProvenance IgnoreOpenAI
-                    if row["License Use (DataProvenance IgnoreOpenAI)"] != 'unspecified' and row["License Use (GitHub)"] != ''  # check if the existing license is unspecified and a possible GitHub license is not empty ''
-                    else row["License Use (GitHub)"],  # if an alternative GitHub license is available (i.e. GitHub is not empty) use the GitHub license
+                    lambda row: row["License Use (GitHub)"]  # check the existing license from DataProvenance IgnoreOpenAI
+                    if row["License Use (DataProvenance IgnoreOpenAI)"] == 'unspecified' and row["License Use (GitHub)"] != ''  # check if the existing license is unspecified and a possible GitHub license is not empty ''
+                    else row["License Use (DataProvenance IgnoreOpenAI)"],  # if an alternative GitHub license is available (i.e. GitHub is not empty) use the GitHub license
                     axis=1
                 )
                 # check that all DataProvenance IgnoreOpenAI license which are undefined are replaced with the DataProvenance IgnoreOpenAI license information
@@ -297,9 +293,9 @@ def apply_filters(
             filtered_df["Model Generated"].apply(lambda x: len(x) == 0)
         ]
 
-    if not filtered_df.empty and text_sources_allow_list:
+    if not filtered_df.empty and text_source_allow_list:
         filtered_df = filtered_df[
-            filtered_df["Text Sources"].apply(lambda x: len(x) == 0 or set(x) <= set(text_sources_allow_list))
+            filtered_df["Text Sources"].apply(lambda x: len(x) == 0 or set(x) <= set(text_source_allow_list))
         ]
 
     if not filtered_df.empty and (selected_start_time or selected_end_time):

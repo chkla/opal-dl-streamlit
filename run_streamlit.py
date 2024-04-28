@@ -253,7 +253,7 @@ def streamlit_app():
                 ["All"] + list(INFO["constants"]["DOMAIN_GROUPS"].keys()),
                 # ["All", "Books", "Code", "Wiki", "News", "Biomedical", "Legal", "Web", "Math+Science"],
                 ["All"])
-            
+
             text_sources = st.multiselect(
                 'Select the text sources to cover in your datasets',
                 ["All"] + io.read_txt('src/configs/limited_text_sources.txt'),
@@ -299,7 +299,7 @@ def streamlit_app():
             selected_domains=domain_multiselect,
             selected_start_time=start_time,
             selected_end_time=end_time,
-            dpi_undefined_license_override=dpi_license_override,
+            dpi_undefined_license_override=int(dpi_license_override),
             no_synthetic_data=model_generated,
             text_source_allow_list=text_sources
         )
