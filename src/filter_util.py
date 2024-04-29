@@ -4,7 +4,7 @@ import pandas as pd
 from collections import defaultdict  # , Counter
 # import streamlit as st
 from src import constants
-from src.helpers import io
+# from src.helpers import io
 
 
 def classify_license(license_name, license_url, all_constants):

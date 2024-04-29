@@ -498,12 +498,13 @@ def streamlit_app():
             display_metrics(tab2_metrics, df_metadata)
 
             with st.container():
-                collection_info_keys = [
-                    "Collection Name",
-                    "Collection URL",
-                    "Collection Hugging Face URL",
-                    "Collection Paper Title",
-                ]
+                # do we need this?
+                # collection_info_keys = [
+                #    "Collection Name",
+                #    "Collection URL",
+                #    "Collection Hugging Face URL",
+                #    "Collection Paper Title",
+                # ]
                 dataset_info_keys = [
                     "Unique Dataset Identifier",
                     "Paper Title",
