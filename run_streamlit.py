@@ -352,8 +352,6 @@ def streamlit_app():
         "Inspect Individual Datasets :mag:"])
 
     with tab1:
-        # insert_main_viz()
-
         if not submitted:
             st.write("When you're ready, fill out your data filtering criteria on the left, and click Submit!\n\n")
 
