@@ -344,6 +344,7 @@ def streamlit_app():
             mime="application/x-yaml"
         )
 
+
     tab1, tab2, tab3, tab4, tab5 = st.tabs([
         "Data Summary",
         ":rainbow[Global Representation] :earth_africa:",
